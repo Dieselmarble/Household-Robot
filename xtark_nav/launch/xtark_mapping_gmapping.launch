@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="scan_topic"  default="/scan" />
+    <arg name="base_frame"  default="base_link"/>
+    <arg name="odom_frame"  value="odom"/>
+    
+    <arg name="use_ekf" default="true"/>
+    <!-- 启动底盘驱动包 --> 
+    <include file="$(find xtark_driver)/launch/xtark_bringup.launch">
+      <arg name="use_ekf" default="$(arg use_ekf)"/>
+    </include>
+    <!-- 启动激光雷达驱动包 -->
+   <include file="$(find rplidar_ros)/launch/rplidar.launch" />
+
+    
+  
+    <!-- 启动GMapping建图算法包 -->
+        <include file="$(find xtark_nav)/launch/include/gmapping_base.launch" />
+
+</launch>

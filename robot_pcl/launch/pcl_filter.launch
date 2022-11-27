@@ -1,0 +1,20 @@
+<launch>
+  <arg name="octo"     default="false"/>
+  <arg name="debug_directory" value="$(env HELLO_FLEET_PATH)/debug/"/>
+  
+  <!-- handle command node -->
+  <group if="$(arg octo)"> 
+    <!--Nav -->
+     <node pkg="robot_pcl" type="pcl_filter_octo" name="robot_pcl_node" output="screen">
+    <param name="debug_directory" type="string" value="$(arg debug_directory)"/>
+    </node>
+ </group>
+
+<group unless="$(arg octo)"> 
+    <!--Nav -->
+    <node pkg="robot_pcl" type="pcl_filter" name="robot_pcl_node" output="screen">
+    <param name="debug_directory" type="string" value="$(arg debug_directory)"/>
+    </node>
+</group>
+  
+</launch>

@@ -1,0 +1,10 @@
+<launch>
+	<!-- Bring up Base and Lidar -->
+	<include file="$(find robot_nav_depthcamera_rs)/launch/Driver/xtark_bringup_depthcamera.launch" />
+
+        <include file="$(find robot_nav_depthcamera_rs)/launch/include/gmapping_base.launch" />
+	<include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
+
+	<node name="robot_pose_publisher" pkg="robot_pose_publisher" type="robot_pose_publisher"/>
+
+</launch>

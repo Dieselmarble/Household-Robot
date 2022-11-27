@@ -1,0 +1,21 @@
+﻿#BNF+IAT 1.0 UTF-8;
+!grammar call;
+
+!slot <action>;
+
+!start <callstart>;
+<callstart>:<choose>; //定义开始规则
+//下面为规则的具体内容
+<choose>:<action>|<navigation>|<turn>|<task1>|<task2>|<greet>; 
+<task1>:[<adjunct1>]<manipulate><object>;
+<task2>:[<adjunct2>]<object><manipulate><position>;
+
+<action>:前进|后退|停止|过来|休眠|谢谢;
+<navigation>:去(1|2|3)点;
+<turn>:(左|右)转;
+<adjunct1>:帮我|请;
+<manipulate>:关|关一下|打|开一下|拿|拿一下|拿一瓶;
+<object>:灯|水杯|水|杯子;
+<greet>:你好|你叫什么名字|你是谁|我是谁|你多大了|你是哪里人|你来这里做什么;
+<adjunct2>:把;
+<position>:过来|一下;

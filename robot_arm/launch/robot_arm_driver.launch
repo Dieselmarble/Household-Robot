@@ -1,0 +1,19 @@
+<launch>
+  <node pkg="robot_arm" type="robot_arm_driver.py" name="robot_arm_driver_node" output="screen">
+    <param name="robot_arm" value="arm_link"/>
+    <param name="robot_hand" value="hand_link"/>
+  </node>
+  <group ns="robot_arm">
+    <param name="GRIPPING_LENGTH" type="int" value="140"/>
+    <param name="Raw_X_AXIS" type="int" value="390"/>
+    <param name="Z_DISTANCE" type="int" value="700"/>
+    <param name="X_DISTANCE" type="int" value="300"/>
+    <param name="ANGLE_DISTANCE" type="int" value="90"/>
+    <param name="GRAB_WIDTH" type="int" value="80"/>
+    <param name="GRIP_LENGTH" type="int" value="80"/>
+    <param name="Raw_X_OBJECT" type="int" value="550"/>
+    <param name="X_AXIS_LENGTH" type="int" value="560"/>
+    <param name="Z_AXIS_LENGTH" type="int" value="400"/>
+    <param name="ANGLE_ERROR" type="int" value="7"/>
+  </group>
+</launch>

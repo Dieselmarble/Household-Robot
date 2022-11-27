@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="debug_directory" value="$(env HELLO_FLEET_PATH)/debug/"/>
+
+  <!-- OBJECT DETECTOR -->
+  <node name="object_detector" pkg="robot_deep_learning" type="detect_objects_python3.py" output="screen">
+    <param name="debug_directory" type="string" value="$(arg debug_directory)"/>
+  </node>
+  <!-- -->
+
+</launch>

@@ -1,0 +1,11 @@
+<launch>
+
+  <arg name="debug_directory" value="$(env HELLO_FLEET_PATH)/debug/"/>
+  
+  <!-- NEAREST MOUTH DETECTOR -->
+  <node name="nearest_mouth_detector" pkg="robot_deep_learning" type="detect_nearest_mouth_python3.py" output="screen">
+    <param name="debug_directory" type="string" value="$(arg debug_directory)"/>
+  </node>
+  <!-- -->
+  
+</launch>

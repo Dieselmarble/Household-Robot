@@ -1,0 +1,24 @@
+<launch>
+<arg name="nav"     default="true"/>
+<arg name="launch_realsense"     default="false"/>
+<rosparam file="$(find xtark_nav)/configuration_files/navigation_params/prohibition_areas.yaml" command="load" ns="/move_base/global_costmap/costmap_prohibition_layer"/>
+<rosparam file="$(find xtark_nav)/configuration_files/navigation_params/prohibition_areas.yaml" command="load" ns="/move_base/local_costmap/costmap_prohibition_layer"/>
+
+<group if="$(arg launch_realsense)"> 
+    <include file="$(find realsense2_camera)/launch/rs_multiple_devices.launch">
+        <arg name="align_depth" value="true"/>
+    </include>
+</group>
+
+<group if="$(arg nav)"> 
+    <!--Nav -->
+    <include file="$(find robot_nav_depthcamera_rs)/launch/RTABSLAM_Navigation.launch"></include>
+</group>
+
+<group unless="$(arg nav)"> 
+    <!--Nav -->
+    <include file="$(find robot_nav_depthcamera_rs)/launch/RTABSLAM_Mapping.launch"></include>
+    <arg unless="$(arg nav)" name="args"  default="--delete_db_on_start"/>
+</group>
+
+</launch>

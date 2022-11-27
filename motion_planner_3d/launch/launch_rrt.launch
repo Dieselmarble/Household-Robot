@@ -1,0 +1,13 @@
+<launch>
+
+  <arg name="debug_directory" value="$(env HELLO_FLEET_PATH)/debug/"/>
+
+  <!-- BODY LANDMARK DETECTOR -->
+  <node name="rrt_plan_node" pkg="motion_planner_3d" type="3d_rrt_star" output="screen">
+    <param name="debug_directory" type="string" value="$(arg debug_directory)"/>
+  </node>
+  <!-- -->
+  
+</launch>
+
+

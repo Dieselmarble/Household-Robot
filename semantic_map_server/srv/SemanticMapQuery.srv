@@ -1,0 +1,6 @@
+string query
+
+----
+
+float64[] translation
+float64[] rotation

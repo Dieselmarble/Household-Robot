@@ -1,0 +1,5 @@
+
+<launch>  
+  <node pkg="robot_vision_pkg" type="vision_talker.py" name="object_detect" output="screen" >
+  </node>
+</launch>

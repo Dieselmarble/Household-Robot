@@ -1,0 +1,5 @@
+<launch>
+	<node name="robot_tts" pkg="robot_audio" type="xtark_tts.py" output="log" respawn="true">
+		<rosparam file="$(find robot_audio)/config/robot_audio.yaml" command="load"/>
+	</node>
+</launch>

@@ -1,0 +1,12 @@
+<launch>
+
+  <arg name="debug_directory" value="$(env HELLO_FLEET_PATH)/debug/"/>
+
+  <!-- BODY LANDMARK DETECTOR -->
+  <node name="body_landmark_detector" pkg="robot_deep_learning" type="detect_body_landmarks_python3.py" output="screen">
+    <param name="debug_directory" type="string" value="$(arg debug_directory)"/>
+  </node>
+  <!-- -->
+  
+</launch>
+

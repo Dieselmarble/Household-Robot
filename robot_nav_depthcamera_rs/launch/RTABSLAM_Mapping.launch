@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<launch>
+	<arg name="use_scan" default="true"/>
+        <arg name="file_path" default="~/Documents/Robot/maps/rtabmap.db"/>
+        <include file="$(find xtark_driver)/launch/xtark_bringup.launch"/>
+        
+        <!-- REALSENSE D435i camera1&2 
+        <include file="$(find realsense2_camera)/launch/rs_multiple_devices.launch">
+                <arg name="align_depth" value="true"/>
+        </include>
+
+
+        <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+                <arg name="align_depth" value="true"/>
+                <arg name="camera" value="cam_1"/>
+                <arg name="serial_no" value="047322070514"/>
+        </include>
+        -->
+        <include file="$(find depthimage_to_laserscan)/launch/depthimage_to_laserscan_rs.launch"/>
+        
+        <include file="$(find rtabmap_ros)/launch/demo/demo_xtark_mapping.launch" >
+                <arg name="subscribe_scan" value="$(arg use_scan)"/>
+                <arg name="database_path" value="$(arg file_path)"/>
+        </include>
+
+   <node pkg="tf" type="static_transform_publisher" name="base_link_to_base_footprint" args="0.00 0 0.0 0 0 0 base_link base_footprint 10"/>
+   <node pkg="tf" type="static_transform_publisher" name="base_footprint_to_imu"     args="-0.05 0 0.05 -1.57 0 0 base_link imu_link 10"/>
+   <node pkg="tf" type="static_transform_publisher" name="base_footprint_to_cam_bottom" args="0.00 0.05 0.05 0.0 0.0 0.0 base_link cam_1_link 10"/>
+</launch>

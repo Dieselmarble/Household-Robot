@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<launch>
+	<param name="use_sim_time" value="false"/>
+<param   name="robot_description" textfile="$(find xtark_description)/urdf/xtark_description_rtab.urdf" />
+
+<arg name="use_ekf" default="true"/>
+
+<arg name="publish_odom_transform" default="true"/>
+
+<!--node
+    name="robot_state_publisher"
+    pkg="robot_state_publisher"
+    type="robot_state_publisher" /-->
+
+
+    <node name="xtark_driver" pkg="xtark_driver" type="xtark_driver" output="screen" respawn="true">
+        <rosparam file="$(find xtark_driver)/config/xtark_config.yaml" command="load"/>
+    	<remap from="/odom" to="/odom_raw"/>
+	<param name="odom_frame" value="odom_raw"/>
+	<param name="publish_odom_transform" value="False"/>
+    </node>
+
+   <node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf" output="screen">
+	<param name="output_frame" value="odom"/>
+	<param name="base_footprint_frame" value="base_link"/>
+	<param name="freq" value="30.0"/>
+	<param name="sensor_timeout" value="1.0"/>
+	<param name="odom_used" value="true"/>
+	<param name="imu_used"  value="true"/>
+	<param name="vo_used"   value="false"/>
+	
+	<remap from="odom" to="/odom_raw"/>
+	<remap from="/imu_data" to="/imu_raw"/>
+	<remap from="/robot_pose_ekf/odom_combined" to="/odom_combined"/>
+   </node>
+   <node pkg="xtark_driver" type="odom_ekf.py" name="odom_ekf_node" output="screen">
+	<remap from="input" to="/odom_combined"/>
+	<remap from="output" to="/odom"/>
+   </node>
+
+   <!-- Bring up Astra  -->
+   <include file="$(find xtark_nav_depthcamera)/launch/Driver/RTAB_Driver/xtark_depthcameraRTAB.launch" />
+   <include file="$(find depthimage_to_laserscan)/launch/depthimage_to_laserscan.launch"/>
+    <node pkg="tf" type="static_transform_publisher" name="base_link_to_base_footprint" args="0.00 0 0.0 0 0 0 base_link base_footprint 10"/>
+    <node pkg="tf" type="static_transform_publisher" name="base_foot_print_to_laser" args="0.10 0 0.1 0 0 0 base_link laser 10"/>
+    <node pkg="tf" type="static_transform_publisher" name="base_footprint_to_imu"     args="-0.05 0 0.05 -1.57 0 0 base_link imu_link 10"/>
+    <node pkg="tf" type="static_transform_publisher" name="base_footprint_to_camera" args="-0.10 0 0.30 1.57 3.14 1.57 base_link camera_link 10"/>
+
+
+
+</launch>

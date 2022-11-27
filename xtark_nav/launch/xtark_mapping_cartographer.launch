@@ -1,0 +1,46 @@
+<launch>
+ <param name="use_sim_time" value="false"/>
+ <!-- <param name="/localization" type="bool" value = "0"/>
+ <param name="/set_inital_pose_x" type="double" value = "0"/>
+ <param name="/set_inital_pose_y" type="double" value = "0"/>
+ <param name="/set_inital_pose_z" type="double" value = "0.0"/>
+ <param name="/set_inital_pose_ox" type="double" value = "0.0"/>
+ <param name="/set_inital_pose_oy" type="double" value = "0.0"/>
+ <param name="/set_inital_pose_oz" type="double" value = "0"/>
+ <param name="/set_inital_pose_ow" type="double" value = "1"/> -->
+
+   <include file="$(find rplidar_ros)/launch/rplidar.launch" />
+   
+  <include file="$(find xtark_driver)/launch/xtark_bringup.launch">
+  </include>
+
+  
+
+
+
+
+  <node name="cartographer_node" pkg="cartographer_ros" type="cartographer_node" args="
+    -configuration_directory $(find xtark_nav)/configuration_files 
+    -configuration_basename xtark_cartographer.lua
+    -load_state_filename /home/zhongxuan/.ros/new_map.pbstream
+
+   "
+    output="screen">
+      <remap from="scan" to="scan_filtered" />
+      
+        
+        
+  </node>
+  
+  <!-- 启动Map server功能包，发布地图 -->
+    <arg name="map_file" default="$(find xtark_nav)/map.yaml"/>
+	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+
+  <!-- <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros"
+      type="cartographer_occupancy_grid_node" args="-resolution 0.05" /> -->
+
+
+ 
+
+</launch>

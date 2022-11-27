@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+	<arg name="device" default="/dev/video0"/>
+        <include file="$(find xtark_driver)/launch/xtark_driver.launch"/>
+	<include file="$(find xtark_driver)/launch/xtark_camera_rs.launch" >
+	</include>
+       	<node name="ORB_SLAM" pkg="ORB_SLAM" type="ORB_SLAM" args="Data/ORBvoc.txt Data/Settings.yaml" output="screen">
+		<remap from="/camera/image_raw" to="/camera/color/image_raw"/>
+	</node>
+        
+	
+	
+
+</launch>

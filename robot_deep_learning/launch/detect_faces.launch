@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="debug_directory" value="$(env HELLO_FLEET_PATH)/debug/"/>
+   
+  <!-- FACIAL LANDMARK DETECTOR -->
+  <node name="face_detector" pkg="robot_deep_learning" type="detect_faces_python3.py" output="screen">
+    <param name="debug_directory" type="string" value="$(arg debug_directory)"/>
+  </node>
+
+</launch>

@@ -1,0 +1,4 @@
+<launch>
+	<node name="robot_tts_offline" pkg="robot_ai_sound" type="tts_offline" output="log" respawn="true">
+	</node>
+</launch>

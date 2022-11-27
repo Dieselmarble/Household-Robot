@@ -1,0 +1,17 @@
+<launch>
+<!--handle task-->
+<include file="$(find robot_manipulation)/launch/handle_task.launch"></include>
+<!--arm-->
+<include file="$(find robot_arm)/launch/robot_arm_driver.launch"></include>
+<!-- pcl filter-->
+<include file="$(find robot_pcl)/launch/pcl_filter.launch">
+ <arg name="octo" value="false"/>
+</include>
+<!--audio
+<include file="$(find robot_manipulation)/launch/start_audio.launch"></include>
+-->
+<!--laser tracker
+<include file="$(find robot_laser_follower)/launch/robot_laser_follower.launch"></include> -->
+<!--semantic map server -->
+<include file="$(find semantic_map_server)/launch/map_server.launch"></include>
+</launch>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="base_frame" default="base_link"/>
+  <arg name="odom_frame" default="odom"/>
+  <arg name="pub_map_odom_transform" default="false"/>
+  <arg name="scan_subscriber_queue_size" default="5"/>
+  <arg name="scan_topic" default="scan_laser"/>
+  <arg name="map_size" default="2048"/>
+    
+  <arg name="use_ekf" default="false"/>
+  <!-- 启动底盘驱动包 -->    
+  <include file="$(find xtark_driver)/launch/xtark_bringup.launch">
+    <arg name="use_ekf" value="$(arg use_ekf)"/>
+  </include>
+  <!-- 启动激光雷达驱动包 -->
+     <include file="$(find rplidar_ros)/launch/rplidar.launch" />
+  
+  
+
+
+        <!-- 启动hector建图算法包 -->
+        <include file="$(find xtark_nav)/launch/include/xtark_hector_mapping.launch"/>
+
+</launch>

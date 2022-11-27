@@ -1,0 +1,8 @@
+<launch>
+<!--TTS-->
+<include file="$(find robot_audio)/launch/robot_tts.launch"></include>
+<!--microphone-->
+<include file="$(find xf_mic_asr_offline)/launch/mic_init.launch"></include>
+<!--voice control-->
+<include file="$(find xf_mic_asr_offline)/launch/voice_control.launch"></include>
+</launch>

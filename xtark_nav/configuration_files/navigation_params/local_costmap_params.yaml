@@ -1,0 +1,20 @@
+local_costmap:
+   global_frame: map
+   robot_base_frame: base_footprint
+   update_frequency: 5.0 #5.0
+   publish_frequency: 5.0 #5.0
+   rolling_window: true
+   width: 3.0  #5.0
+   height: 3.0 #5.0
+   resolution: 0.02
+   transform_tolerance: 1.0 #1.0
+   static_map: false
+  
+   plugins:
+   - {name: static_layer,        type: "costmap_2d::StaticLayer"} 
+   - {name: obstacle_layer,      type: "costmap_2d::VoxelLayer"}
+   #- {name: realsense_layer,     type: "costmap_2d::VoxelLayer"}
+   # - {name: sonar_layer ,      type: "range_sensor_layer::RangeSensorLayer"}
+   #- {name: costmap_prohibition_layer, type: "costmap_prohibition_layer_namespace::CostmapProhibitionLayer"}
+   - {name: inflation_layer,     type: "costmap_2d::InflationLayer"}
+   #- {name: rgbd_obstacle_layer, type: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"}

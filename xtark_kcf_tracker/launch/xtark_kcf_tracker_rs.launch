@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+	<include file="$(find xtark_driver)/launch/xtark_bringup.launch"/>
+	<include file="$(find xtark_nav_depthcamera_rs)/launch/Driver/xtark_depthcamera.launch"/>
+	<node pkg="xtark_kcf_tracker" name="xtark_kcf_track_rs" type="kcf_tracker_rs" output="screen">
+		<!--remap from="/camera/color/image_color" to="/camera/image_raw"/>
+		<remap from="/tracker/cmd_vel" to="/cmd_vel"/-->
+       <remap from="/camera/rgb/image_color" to="/camera/color/image_raw"/>
+                <remap from="/tracker/cmd_vel" to="/cmd_vel"/>
+                <remap from="/camera/depth/image" to="/camera/depth/image_rect_raw"/>
+	</node>
+</launch>

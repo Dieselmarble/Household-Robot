@@ -1,0 +1,5 @@
+int8 task_id # command int
+--- 
+bool successful # whether the task is excecuted successfully
+bool redo_required # need redo or not
+string message # feedback message
